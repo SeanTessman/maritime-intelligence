@@ -38,18 +38,6 @@ provenance) is the core of forward-deployed and intelligence-analysis data work.
 | Analyst tools | 8-page dashboard, case management with provenance, HTML/MD/CSV/PDF reports, 11 read-only API endpoints |
 | Quality | 80 automated tests (unit + PostGIS integration + API), Ruff, CI workflow |
 
-## Before publishing to GitHub
-
-Run the offline publication safety check:
-
-```bash
-python tasks.py publish-check
-```
-
-This checks tracked files (or all source files in an exported ZIP) for common private key files, suspicious credential strings, and files larger than 25 MiB. It exits nonzero if an issue is found. **Review its findings manually:** this is a heuristic safeguard, not a comprehensive secret scanner or proof that the project is production-ready. Never commit `.env`, raw AIS downloads, database exports, or credentials. Confirm that any screenshots and public data comply with their source terms.
-
-To publish, create a new GitHub repository, push the source code, and verify that GitHub Actions CI passes. The application requires PostgreSQL/PostGIS and source datasets for a full live demonstration; the screenshots in this README are not a hosted deployment.
-
 ## Architecture
 
 ```mermaid
