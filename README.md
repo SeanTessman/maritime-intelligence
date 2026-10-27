@@ -1,5 +1,7 @@
 # Maritime Intelligence & Anomaly Detection Platform (MIADP)
 
+
+http://127.0.0.1:8501/
 > **Disclaimer:** This application is an educational maritime analytics portfolio project.
 > Anomaly detections represent statistical or rule-based deviations, not evidence of
 > illegal or hostile activity.
