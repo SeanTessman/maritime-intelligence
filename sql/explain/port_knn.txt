@@ -1,0 +1,9 @@
+Limit  (cost=0.14..2.45 rows=5 width=12) (actual time=0.040..0.045 rows=5 loops=1)
+  Buffers: shared hit=2
+  ->  Index Scan using ix_ports_geog on ports  (cost=0.14..19.10 rows=41 width=12) (actual time=0.039..0.044 rows=5 loops=1)
+        Order By: (geog <-> '0101000020E610000033333333338352C03333333333534440'::geography)
+        Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=33
+Planning Time: 0.251 ms
+Execution Time: 0.069 ms

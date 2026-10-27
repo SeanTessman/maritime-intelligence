@@ -1,0 +1,146 @@
+{
+  "dataset": "SYNTHETIC benchmark (src/maritime/synthetic.py, seed=7) - not NOAA data",
+  "unit": "vessel-day track",
+  "split": {
+    "train_days": "<= 2030-01-11",
+    "n_train": 758,
+    "n_test": 290,
+    "test_positives": 31
+  },
+  "rules": {
+    "tp": 30,
+    "fp": 0,
+    "fn": 1,
+    "tn": 259,
+    "precision": 1.0,
+    "recall": 0.9677,
+    "f1": 0.9836,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": [
+      [
+        259,
+        0
+      ],
+      [
+        1,
+        30
+      ]
+    ]
+  },
+  "isolation_forest": {
+    "tp": 4,
+    "fp": 0,
+    "fn": 27,
+    "tn": 259,
+    "precision": 1.0,
+    "recall": 0.129,
+    "f1": 0.2286,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": [
+      [
+        259,
+        0
+      ],
+      [
+        27,
+        4
+      ]
+    ],
+    "average_precision": 0.8715,
+    "threshold": 0.6003
+  },
+  "isolation_forest_threshold_sweep": [
+    {
+      "train_quantile": 0.8,
+      "threshold": 0.447,
+      "tp": 30,
+      "fp": 35,
+      "fn": 1,
+      "precision": 0.4615,
+      "recall": 0.9677,
+      "f1": 0.625,
+      "false_positive_rate": 0.1351
+    },
+    {
+      "train_quantile": 0.9,
+      "threshold": 0.4811,
+      "tp": 28,
+      "fp": 14,
+      "fn": 3,
+      "precision": 0.6667,
+      "recall": 0.9032,
+      "f1": 0.7671,
+      "false_positive_rate": 0.0541
+    },
+    {
+      "train_quantile": 0.95,
+      "threshold": 0.5284,
+      "tp": 18,
+      "fp": 2,
+      "fn": 13,
+      "precision": 0.9,
+      "recall": 0.5806,
+      "f1": 0.7059,
+      "false_positive_rate": 0.0077
+    },
+    {
+      "train_quantile": 0.99,
+      "threshold": 0.6003,
+      "tp": 4,
+      "fp": 0,
+      "fn": 27,
+      "precision": 1.0,
+      "recall": 0.129,
+      "f1": 0.2286,
+      "false_positive_rate": 0.0
+    }
+  ],
+  "rules_or_model": {
+    "tp": 31,
+    "fp": 0,
+    "fn": 0,
+    "tn": 259,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": [
+      [
+        259,
+        0
+      ],
+      [
+        0,
+        31
+      ]
+    ]
+  },
+  "recall_by_injected_kind": {
+    "course_reversal": {
+      "n": 3,
+      "rule_recall": 1.0,
+      "model_recall": 0.0
+    },
+    "loitering": {
+      "n": 4,
+      "rule_recall": 1.0,
+      "model_recall": 0.0
+    },
+    "position_jump": {
+      "n": 7,
+      "rule_recall": 1.0,
+      "model_recall": 0.0
+    },
+    "reporting_gap": {
+      "n": 5,
+      "rule_recall": 0.8,
+      "model_recall": 0.6
+    },
+    "speed_spike": {
+      "n": 12,
+      "rule_recall": 1.0,
+      "model_recall": 0.083
+    }
+  },
+  "seed": 42
+}

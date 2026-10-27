@@ -1,0 +1,49 @@
+{
+  "model_version": "s42_d786048cb7908ff8",
+  "threshold": 0.5871992961195843,
+  "seed": 42,
+  "train_window": [
+    "2023-01-09 00:00:00+00:00",
+    "2023-01-13 23:59:59+00:00"
+  ],
+  "eval_window": [
+    "2023-01-14 00:00:00+00:00",
+    "2023-01-15 23:59:59+00:00"
+  ],
+  "n_train_tracks": 1937,
+  "n_eval_tracks": 655,
+  "score_quantiles_train": {
+    "0.5": 0.4242,
+    "0.9": 0.5306,
+    "0.99": 0.5942
+  },
+  "score_quantiles_eval": {
+    "0.5": 0.4194,
+    "0.9": 0.5268,
+    "0.99": 0.6009
+  },
+  "seed_stability": {
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "mean_spearman": 0.9916,
+    "min_spearman": 0.9877,
+    "mean_top20_jaccard": 0.7273
+  },
+  "train_vs_eval_shift": {
+    "ks_statistic": 0.0578,
+    "p_value": 0.07256323651480491
+  },
+  "eval_flagged": {
+    "model": 10,
+    "rules": 121,
+    "both": 7,
+    "model_only": 3,
+    "rules_only": 114
+  },
+  "note": "Real AIS data has no ground-truth labels; these are stability and agreement diagnostics, not accuracy."
+}

@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "ruff>=0.6"
+      - run: ruff check .
+      - run: ruff format --check .
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: miadp_test
+          POSTGRES_USER: miadp
+          POSTGRES_PASSWORD: ci_only_password
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U miadp -d miadp_test"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      MIADP_TEST_DATABASE_URL: postgresql+psycopg://miadp:ci_only_password@127.0.0.1:5432/miadp_test
+      POSTGRES_PASSWORD: ci_only_password
+      PYTHONPATH: src:.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      # Synthetic fixture is committed; regenerate the benchmark parquet used by some tests.
+      - run: python -m maritime.cli synthetic
+      - run: pytest -ra --cov=maritime --cov-report=term-missing

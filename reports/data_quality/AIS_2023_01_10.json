@@ -1,0 +1,72 @@
+{
+  "file": "AIS_2023_01_10.zip",
+  "accepted": 242469,
+  "inserted": 242467,
+  "rejected": 0,
+  "quality_flags": {
+    "COG_INVALID": 0,
+    "SOG_INVALID": 0,
+    "MMSI_SUSPECT": 0,
+    "COG_UNAVAILABLE": 28582,
+    "HEADING_INVALID": 0,
+    "SOG_UNAVAILABLE": 506,
+    "HEADING_UNAVAILABLE": 89407,
+    "CONFLICTING_TIMESTAMP": 0
+  },
+  "time_coverage": {
+    "max": "2023-01-10T23:59:59+00:00",
+    "min": "2023-01-10T00:00:00+00:00"
+  },
+  "unique_vessels": 402,
+  "in_study_region": 242472,
+  "missing_by_field": {
+    "cog": 0,
+    "imo": 102416,
+    "sog": 0,
+    "cargo": 11888,
+    "draft_m": 117907,
+    "heading": 0,
+    "width_m": 43417,
+    "length_m": 25180,
+    "call_sign": 9961,
+    "nav_status": 12222,
+    "vessel_name": 440,
+    "vessel_type": 4,
+    "transceiver_class": 0
+  },
+  "rejected_by_reason": {
+    "missing_mmsi": 0,
+    "invalid_timestamp": 0,
+    "zero_zero_position": 0,
+    "invalid_coordinates": 0,
+    "invalid_mmsi_format": 0,
+    "missing_coordinates": 0
+  },
+  "geographic_coverage": {
+    "lat_max": 41.09992,
+    "lat_min": 40.30027,
+    "lon_max": -73.4,
+    "lon_min": -74.29342
+  },
+  "missing_pct_by_field": {
+    "cog": 0.0,
+    "imo": 42.24,
+    "sog": 0.0,
+    "cargo": 4.9,
+    "draft_m": 48.63,
+    "heading": 0.0,
+    "width_m": 17.91,
+    "length_m": 10.38,
+    "call_sign": 4.11,
+    "nav_status": 5.04,
+    "vessel_name": 0.18,
+    "vessel_type": 0.0,
+    "transceiver_class": 0.0
+  },
+  "outside_study_region": 7892996,
+  "duplicates_within_file": 3,
+  "total_raw_observations": 8135468,
+  "mmsi_with_multiple_names": 0,
+  "invalid_coordinates_filewide": 0,
+  "duplicates_already_in_database": 2
+}

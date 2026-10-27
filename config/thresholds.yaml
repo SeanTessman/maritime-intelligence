@@ -1,0 +1,60 @@
+# MIADP configurable thresholds.
+#
+# These are STARTING HEURISTICS chosen for a busy harbour study area and 1-minute
+# NOAA AIS sampling. They are NOT maritime safety, regulatory, or intelligence
+# standards. Every value is documented in docs/methodology.md with its rationale.
+
+trajectory:
+  gap_threshold_s: 1800            # a gap > 30 min starts a new trajectory segment
+  jump_break_implied_kn: 100       # implied speed above this between fixes breaks the segment
+  jump_break_min_distance_m: 5000  # ...but only if the jump is at least this far
+  edge_margin_m: 3000              # gap endpoints within this distance of the bbox edge
+                                   # are labelled "near_study_area_edge"
+  port_margin_m: 3000              # gap endpoints within this distance of a port are "in_port"
+
+proximity:
+  radius_m: 2500                   # WPI points are rounded to ~1 arc-minute (~1.85 km),
+                                   # so the radius must exceed that rounding error
+  merge_gap_s: 3600                # proximity fixes closer in time than this merge into one event
+
+rules:
+  high_speed_kn:                   # reported SOG above which a vessel-type group is "unusual"
+    cargo: 28
+    tanker: 22
+    passenger: 42                  # NY Harbor fast ferries routinely do 25-35 kn
+    tug_tow: 18
+    fishing: 20
+    pleasure_sailing: 45
+    other: 40
+  high_speed_min_consecutive: 2    # require N consecutive fixes above threshold
+  speed_discrepancy_kn: 15         # |implied - reported| speed must exceed this ...
+  speed_discrepancy_ratio: 2.0     # ... and differ by at least this factor
+  speed_discrepancy_min_dt_s: 30   # ignore very short intervals (GPS noise dominates)
+  speed_discrepancy_max_dt_s: 600
+  speed_discrepancy_min_distance_m: 200
+  reporting_gap_s: 7200            # mid-region gap of > 2 h while moving
+  reporting_gap_min_sog_kn: 1.0
+  course_change_deg: 120           # abrupt change in COG between consecutive fixes ...
+  course_change_max_dt_s: 120      # ... within this interval ...
+  course_change_min_sog_kn: 8      # ... while both fixes report at least this speed
+  position_jump_implied_kn: 80
+  position_jump_min_distance_m: 2000
+  loiter_max_sog_kn: 1.0
+  loiter_min_duration_s: 10800     # 3 h continuously below loiter speed ...
+  loiter_min_port_distance_m: 3000 # ... further than this from any WPI port
+  loiter_skip_nav_status: [1, 5]   # 1 = at anchor, 5 = moored (self-reported)
+  peer_min_group_size: 10
+  peer_robust_z: 6.0               # |robust z| vs same vessel-type group
+  peer_features: [max_sog, mean_sog, route_length_km]
+
+isolation_forest:
+  n_estimators: 300
+  max_samples: auto
+  contamination: auto              # NOT a threat rate; see model card
+  alert_quantile: 0.99             # review threshold = 99th pct of TRAINING scores
+  min_track_obs: 10
+
+network:
+  min_shared_overlap_s: 900        # SHARED_PORT_PROXIMITY needs >= 15 min of overlapping time
+  betweenness_k: 500               # sampled pivots for betweenness on large graphs (seeded)
+  repeated_region_min_days: 3

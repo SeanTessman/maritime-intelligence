@@ -1,0 +1,8 @@
+HashAggregate  (cost=76761.10..80156.16 rows=169753 width=24) (actual time=493.439..494.648 rows=2408 loops=1)
+  Group Key: floor((lat / '0.01'::double precision)), floor((lon / '0.01'::double precision))
+  Batches: 1  Memory Usage: 6417kB
+  Buffers: shared hit=30079
+  ->  Seq Scan on ais_positions  (cost=0.00..64029.62 rows=1697531 width=16) (actual time=0.021..261.333 rows=1697405 loops=1)
+        Buffers: shared hit=30079
+Planning Time: 0.137 ms
+Execution Time: 499.120 ms

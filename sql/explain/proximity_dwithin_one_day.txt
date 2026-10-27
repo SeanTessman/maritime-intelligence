@@ -1,0 +1,21 @@
+Nested Loop  (cost=0.69..5325260.20 rows=252403 width=12) (actual time=231.427..1461.129 rows=157616 loops=1)
+  Buffers: shared hit=639245
+  ->  Index Scan using ix_ais_positions_time on ais_positions p  (cost=0.43..12177.05 rows=252403 width=40) (actual time=0.087..101.503 rows=246123 loops=1)
+        Index Cond: ((base_datetime >= '2023-01-09 00:00:00+00'::timestamp with time zone) AND (base_datetime <= '2023-01-10 00:00:00+00'::timestamp with time zone))
+        Buffers: shared hit=222973
+  ->  Limit  (cost=0.26..21.03 rows=1 width=12) (actual time=0.004..0.004 rows=1 loops=246123)
+        Buffers: shared hit=416272
+        ->  Index Scan using ix_ports_geog on ports pt  (cost=0.26..21.03 rows=1 width=12) (actual time=0.004..0.004 rows=1 loops=246123)
+              Index Cond: (geog && _st_expand(p.geog, '2500'::double precision))
+              Order By: (geog <-> p.geog)
+              Filter: st_dwithin(p.geog, geog, '2500'::double precision, true)
+              Rows Removed by Filter: 0
+              Buffers: shared hit=416272
+Planning:
+  Buffers: shared hit=75 read=3
+Planning Time: 0.723 ms
+JIT:
+  Functions: 15
+  Options: Inlining true, Optimization true, Expressions true, Deforming true
+  Timing: Generation 0.924 ms, Inlining 74.419 ms, Optimization 95.757 ms, Emission 61.029 ms, Total 232.129 ms
+Execution Time: 1493.668 ms

@@ -1,0 +1,26 @@
+Finalize Aggregate  (cost=89432.88..89432.89 rows=1 width=8) (actual time=120.922..130.881 rows=1 loops=1)
+  Buffers: shared hit=2374 read=4428
+  ->  Gather  (cost=89432.67..89432.88 rows=2 width=8) (actual time=120.911..130.871 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=2374 read=4428
+        ->  Partial Aggregate  (cost=88432.67..88432.68 rows=1 width=8) (actual time=104.994..104.998 rows=1 loops=3)
+              Buffers: shared hit=2374 read=4428
+              ->  Parallel Bitmap Heap Scan on ais_positions  (cost=20521.69..88421.64 rows=4412 width=0) (actual time=89.244..104.779 rows=2953 loops=3)
+                    Recheck Cond: ((base_datetime >= '2023-01-11 12:00:00+00'::timestamp with time zone) AND (base_datetime <= '2023-01-11 15:00:00+00'::timestamp with time zone))
+                    Filter: st_intersects(geog, '0103000020E6100000010000000500000066666666668652C0CDCCCCCCCC4C444066666666668652C09A9999999959444000000000008052C09A9999999959444000000000008052C0CDCCCCCCCC4C444066666666668652C0CDCCCCCCCC4C4440'::geography)
+                    Rows Removed by Filter: 204
+                    Heap Blocks: exact=1110
+                    Buffers: shared hit=2374 read=4428
+                    ->  BitmapAnd  (cost=20521.69..20521.69 rows=9252 width=0) (actual time=86.930..86.933 rows=0 loops=1)
+                          Buffers: shared hit=82 read=4428
+                          ->  Bitmap Index Scan on ix_ais_positions_time  (cost=0.00..703.40 rows=35097 width=0) (actual time=2.083..2.084 rows=36310 loops=1)
+                                Index Cond: ((base_datetime >= '2023-01-11 12:00:00+00'::timestamp with time zone) AND (base_datetime <= '2023-01-11 15:00:00+00'::timestamp with time zone))
+                                Buffers: shared hit=82
+                          ->  Bitmap Index Scan on ix_ais_positions_geog  (cost=0.00..19812.75 rows=447512 width=0) (actual time=84.701..84.701 rows=458266 loops=1)
+                                Index Cond: (geog && '0103000020E6100000010000000500000066666666668652C0CDCCCCCCCC4C444066666666668652C09A9999999959444000000000008052C09A9999999959444000000000008052C0CDCCCCCCCC4C444066666666668652C0CDCCCCCCCC4C4440'::geography)
+                                Buffers: shared read=4428
+Planning:
+  Buffers: shared hit=15
+Planning Time: 1.915 ms
+Execution Time: 131.079 ms

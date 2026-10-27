@@ -1,0 +1,117 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Investigation case 1: SYNTHETIC demo: mid-region reporting gap</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:1000px;margin:24px auto;
+padding:0 16px;color:#111827;line-height:1.5}h1{font-size:1.6rem}h2{font-size:1.15rem;border-bottom:1px solid #e5e7eb;
+padding-bottom:4px;margin-top:28px}.disc{background:#fef3c7;border-left:4px solid #d97706;padding:8px 12px}
+.meta{color:#4b5563;font-size:.9rem}table.t{border-collapse:collapse;font-size:.8rem;width:100%;overflow-x:auto;display:block}
+table.t th,table.t td{border:1px solid #e5e7eb;padding:3px 6px;text-align:left}table.t th{background:#f3f4f6}</style></head>
+<body><h1>Investigation case 1: SYNTHETIC demo: mid-region reporting gap</h1><p class="disc">This application is an educational maritime analytics portfolio project. Anomaly detections represent statistical or rule-based deviations, not evidence of illegal or hostile activity.</p>
+<p class="meta">Report type: anomaly_investigation &middot; Analysis period: 2030-01-07 04:37 to 2030-01-07 07:39 UTC<br>
+Generated 2026-10-19T18:57:17+00:00 by MIADP 0.1.0</p>
+<h2>Data sources</h2><ul><li>synthetic_scenario / file n/a</li></ul>
+<h2>Methods</h2><ul><li>Detections from configurable rules and an Isolation Forest on vessel-day tracks.</li><li>Evidence attached by an analyst; provenance captured when attached.</li></ul>
+<h2>Case</h2><p>Status: Insufficient evidence. Created 2026-10-19 18:57 UTC by local-analyst.</p><p>Synthetic vessel stops reporting mid-harbour for ~3 h and reappears further along its route.</p>
+<p><b>Status history</b></p><table class="dataframe t">
+  <thead>
+    <tr style="text-align: right;">
+      <th>old_status</th>
+      <th>new_status</th>
+      <th>changed_by</th>
+      <th>reason</th>
+      <th>changed_at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>None</td>
+      <td>New</td>
+      <td>local-analyst</td>
+      <td>case opened</td>
+      <td>2026-10-19 18:57:17.792941+00:00</td>
+    </tr>
+    <tr>
+      <td>New</td>
+      <td>Under review</td>
+      <td>local-analyst</td>
+      <td>triage started</td>
+      <td>2026-10-19 18:57:17.822291+00:00</td>
+    </tr>
+    <tr>
+      <td>Under review</td>
+      <td>Insufficient evidence</td>
+      <td>local-analyst</td>
+      <td>Gap alone cannot distinguish coverage loss from a powered-down unit.</td>
+      <td>2026-10-19 18:57:17.824667+00:00</td>
+    </tr>
+  </tbody>
+</table><h2>Detections under review</h2><p>Event 3920 (reporting_gap): No observations for 3.02 h while the vessel was moving, away from the study-area edge and ports; it moved 5.59 km across the gap. Possible benign explanations: receiver coverage holes, station outages, data-feed gaps, or a powered-down unit. To interpret this, review: coverage maps for the receiver network, satellite AIS, and whether other vessels in the same area also have gaps at that time. This is a rule-based deviation, not evidence of illegal or hostile activity.</p>
+<p><b>Anomaly evidence</b></p><table class="dataframe t">
+  <thead>
+    <tr style="text-align: right;">
+      <th>anomaly_event_id</th>
+      <th>anomaly_type</th>
+      <th>detector</th>
+      <th>anomaly_mmsi</th>
+      <th>event_time</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3920.0</td>
+      <td>reporting_gap</td>
+      <td>rule</td>
+      <td>999010134</td>
+      <td>2030-01-07 04:37:56+00:00</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table><h2>Supporting observations</h2>
+<p><b>Positions</b></p><table class="dataframe t">
+  <thead>
+    <tr style="text-align: right;">
+      <th>position_id</th>
+      <th>position_mmsi</th>
+      <th>base_datetime</th>
+      <th>lat</th>
+      <th>lon</th>
+      <th>sog</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1705599.0</td>
+      <td>999010134</td>
+      <td>2030-01-07 04:37:56+00:00</td>
+      <td>40.567325</td>
+      <td>-74.020257</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <td>1705600.0</td>
+      <td>999010134</td>
+      <td>2030-01-07 07:39:10+00:00</td>
+      <td>40.517503</td>
+      <td>-74.029297</td>
+      <td>6.7</td>
+    </tr>
+  </tbody>
+</table><h2>Analyst notes</h2>
+<p><b>Notes</b></p><table class="dataframe t">
+  <thead>
+    <tr style="text-align: right;">
+      <th>added_at</th>
+      <th>added_by</th>
+      <th>note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2026-10-19 18:57:17.819892+00:00</td>
+      <td>local-analyst</td>
+      <td>Gap is mid-region (not near the study-area edge or a port). Checked neighbouring synthetic vessels: no common outage in this synthetic scenario. In real data the next step would be to check receiver coverage and satellite AIS before drawing conclusions.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Evidence references</h2><ul><li>anomaly_events.event_id=3920</li><li>ais_positions.position_id=1705599</li><li>ais_positions.position_id=1705600</li></ul>
+<h2>Limitations</h2><ul><li>AIS is self-reported and received by terrestrial stations; coverage varies and gaps are common. An observation gap is not evidence of deliberate transponder deactivation.</li><li>NOAA Marine Cadastre data is downsampled to roughly one fix per minute per vessel.</li><li>WPI ports are single reference points; &#39;near port&#39; means within the configured radius of that point, not verified berthing.</li><li>Rule thresholds are heuristics for this study area, not safety or regulatory standards.</li><li>Isolation Forest scores rank statistical unusualness; they are not probabilities of any behaviour and say nothing about intent.</li></ul></body></html>
